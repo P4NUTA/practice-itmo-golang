@@ -1,0 +1,7 @@
+# system files
+.DS-store
+.idea
+
+# generated
+/bin
+
