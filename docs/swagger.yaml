@@ -1,0 +1,149 @@
+basePath: /
+definitions:
+  endpoint.AddBookRequest:
+    properties:
+      author:
+        type: string
+      description:
+        type: string
+      name:
+        type: string
+    type: object
+  endpoint.BookRequest:
+    properties:
+      id:
+        type: integer
+    type: object
+  endpoint.BookResponse:
+    properties:
+      author:
+        type: string
+      description:
+        type: string
+      id:
+        type: integer
+      name:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: fiber@swagger.io
+    name: API Support
+  description: This is a sample swagger for Fiber
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Fiber Example API
+  version: "1.0"
+paths:
+  /add-book:
+    post:
+      consumes:
+      - application/json
+      description: Add new book
+      parameters:
+      - description: book info
+        in: body
+        name: book
+        schema:
+          $ref: '#/definitions/endpoint.AddBookRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: integer
+      security:
+      - ApiKeyAuth: []
+      summary: Add book
+      tags:
+      - books
+  /delete-book:
+    post:
+      consumes:
+      - application/json
+      description: Delete book
+      parameters:
+      - description: book info
+        in: body
+        name: book
+        schema:
+          $ref: '#/definitions/endpoint.BookRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: boolean
+      security:
+      - ApiKeyAuth: []
+      summary: Delete book
+      tags:
+      - books
+  /get-book:
+    post:
+      consumes:
+      - application/json
+      description: get book info
+      parameters:
+      - description: book id
+        in: body
+        name: book
+        required: true
+        schema:
+          $ref: '#/definitions/endpoint.BookRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/endpoint.BookResponse'
+      security:
+      - ApiKeyAuth: []
+      summary: Get book
+      tags:
+      - books
+  /get-books:
+    post:
+      consumes:
+      - application/json
+      description: get book list
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              items:
+                $ref: '#/definitions/endpoint.BookResponse'
+              type: array
+            type: array
+      security:
+      - ApiKeyAuth: []
+      summary: Get book list
+      tags:
+      - books
+  /main:
+    get:
+      consumes:
+      - application/json
+      description: test connection
+      produces:
+      - text/plain
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      security:
+      - ApiKeyAuth: []
+      summary: test connection
+      tags:
+      - test
+swagger: "2.0"
